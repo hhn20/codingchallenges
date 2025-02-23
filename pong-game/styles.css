@@ -9,7 +9,7 @@ html, body {
     width: 80%;
     height: 50%;
     border: 1px solid white;
-    border-radius: 10px;
+    border-radius: 5px;
 
 }
 
@@ -30,12 +30,11 @@ html, body {
     height: 10%;
     width: 5px;
     border: 1px solid blue;
+    border-radius: 2px;
 }
 
 #paddle1 {
     margin-left: 5px;
-    margin-top: 1px;
-    margin-bottom: 1px;
     left: 0;
     bottom: 50%;
 }
@@ -43,8 +42,6 @@ html, body {
 #paddle2 {
     margin-right: 5px;
     right: 0;
-    margin-top: 1px;
-    margin-bottom: 1px;
     bottom: 50%;
 }
 
