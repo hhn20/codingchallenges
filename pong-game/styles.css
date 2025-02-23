@@ -1,0 +1,46 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+}
+#table-element {
+    position: relative;
+    width: 80%;
+    height: 50%;
+    border: 1px solid white;
+    border-radius: 10px;
+
+}
+
+#table-element::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;               /* Position at 50% of parent's width */
+    width: 1px;
+    height: 100%;
+    background-color: white;
+}
+
+
+.paddle {
+    position: absolute;
+    height: 10%;
+    width: 5px;
+    border: 1px solid blue;
+}
+
+#paddle1 {
+    margin-left: 5px;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    left: 0;
+}
+
+#paddle2 {
+    margin-right: 5px;
+    right: 0;
+    margin-top: 1px;
+    margin-bottom: 1px;0
+}
