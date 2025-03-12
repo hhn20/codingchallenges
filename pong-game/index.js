@@ -1,5 +1,6 @@
 const container = document.getElementById("table-element");
-const paddle = document.getElementById("paddle1")
+const paddle1 = document.getElementById("paddle1")
+const paddle2 = document.getElementById("paddle2")
 const ball = document.getElementById("ball")
 const step = 10;
 let offsetY = 0;
@@ -9,7 +10,7 @@ let offsetY = 0;
 document.addEventListener('keydown', (event) => {
 
     const containerRect = container.getBoundingClientRect();
-    const paddleRect = paddle.getBoundingClientRect();
+    const paddleRect = paddle1.getBoundingClientRect();
 
     switch (event.key) {
 
@@ -30,7 +31,7 @@ document.addEventListener('keydown', (event) => {
             break
 
     }
-    paddle.style.transform = `translate(0px, ${offsetY}px)`;
+    paddle1.style.transform = `translate(0px, ${offsetY}px)`;
 
 });
 
@@ -48,9 +49,9 @@ document.getElementById("start_button").addEventListener('click', (event) => {
 
     console.log("Initial Position:", initialBallX, initialBallY);
 
-    let dx = -5; // Randomize left or right
-    // let dy = 5 * (Math.random() < 0.5 ? -1 : 1); // Randomize up or down
-    let dy = 0
+    const speed = 5 + Math.random() * 3, angle = (Math.random() * 120 - 60) * (Math.PI / 180);
+    let dx = speed * Math.cos(angle)* (Math.random()<0.5 ? -1 : 1), dy = speed * Math.sin(angle)* (Math.random()<0.5 ? -1 : 1);
+
     let offsetX = 0;
     let offsetY = 0;
     let isPause = false;
@@ -70,6 +71,13 @@ document.getElementById("start_button").addEventListener('click', (event) => {
             dy = -dy;
         }
 
+        if (ballRect.left - 2 <= paddleRect.right && 
+            ((ballRect.top >= paddleRect.top && ballRect.top <= paddleRect.bottom) || 
+             (ballRect.bottom >= paddleRect.top && ballRect.bottom <= paddleRect.bottom))) {
+             dx = -dx;
+         }
+        
+        
         if (ballRect.left - 2 <= paddleRect.right && 
             ((ballRect.top >= paddleRect.top && ballRect.top <= paddleRect.bottom) || 
              (ballRect.bottom >= paddleRect.top && ballRect.bottom <= paddleRect.bottom))) {
@@ -97,8 +105,9 @@ document.getElementById("start_button").addEventListener('click', (event) => {
                 return sleep(3000);  // ✅ Wait another 3 seconds after reset
             })
             .then(() => {
-                dx = 5 * (Math.random() < 0.5 ? -1 : 1); // Randomize left/right direction
-                dy = 5 * (Math.random() < 0.5 ? -1 : 1); // Randomize up/down direction        
+                const speed = 5 + Math.random() * 3, angle = (Math.random() * 120 - 60) * (Math.PI / 180);
+                dx = speed * Math.cos(angle) * (Math.random()<0.5 ? -1 : 1);
+                dy = speed * Math.sin(angle) * (Math.random()<0.5 ? -1 : 1);     
             })
             .then(() => {
                 isPause = false;  // ✅ Resume movement **only after all delays**
