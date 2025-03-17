@@ -35,7 +35,7 @@ document.addEventListener('keydown', (event) => {
 
 });
 
-
+document.addEventListener()
 
 document.getElementById("start_button").addEventListener('click', (event) => {
     const ballRect = ball.getBoundingClientRect();
@@ -53,7 +53,7 @@ document.getElementById("start_button").addEventListener('click', (event) => {
 
     const speed = 10 + Math.random() * 3, angle = (Math.random() * 120 - 60) * (Math.PI / 180);
     // let dx = speed * Math.cos(angle)* (Math.random()<0.5 ? -1 : 1), dy = speed * Math.sin(angle)* (Math.random()<0.5 ? -1 : 1);
-    let dx = 5; let dy = 0;
+    let dx = 5; let dy = 2;
     let offsetX = 0;
     let offsetY = 0;
     let isPause = false;
