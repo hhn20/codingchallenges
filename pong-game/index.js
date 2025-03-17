@@ -40,7 +40,9 @@ document.addEventListener('keydown', (event) => {
 document.getElementById("start_button").addEventListener('click', (event) => {
     const ballRect = ball.getBoundingClientRect();
     const containerRect = container.getBoundingClientRect();
-    const paddleRect = paddle.getBoundingClientRect();
+    const paddleRect1 = paddle1.getBoundingClientRect();
+    const paddleRect2 = paddle2.getBoundingClientRect();
+
 
 
     // Store the ball's initial position (relative to the container)
@@ -49,9 +51,9 @@ document.getElementById("start_button").addEventListener('click', (event) => {
 
     console.log("Initial Position:", initialBallX, initialBallY);
 
-    const speed = 5 + Math.random() * 3, angle = (Math.random() * 120 - 60) * (Math.PI / 180);
-    let dx = speed * Math.cos(angle)* (Math.random()<0.5 ? -1 : 1), dy = speed * Math.sin(angle)* (Math.random()<0.5 ? -1 : 1);
-
+    const speed = 10 + Math.random() * 3, angle = (Math.random() * 120 - 60) * (Math.PI / 180);
+    // let dx = speed * Math.cos(angle)* (Math.random()<0.5 ? -1 : 1), dy = speed * Math.sin(angle)* (Math.random()<0.5 ? -1 : 1);
+    let dx = 5; let dy = 0;
     let offsetX = 0;
     let offsetY = 0;
     let isPause = false;
@@ -64,23 +66,23 @@ document.getElementById("start_button").addEventListener('click', (event) => {
         if (isPause) return;
 
         const ballRect = ball.getBoundingClientRect();
-        const paddleRect = paddle.getBoundingClientRect()
+        const paddleRect1 = paddle1.getBoundingClientRect()
 
         // Ball bounces off top/bottom walls
         if (ballRect.top - 2 <= containerRect.top || ballRect.bottom + 2 >= containerRect.bottom) {
             dy = -dy;
         }
 
-        if (ballRect.left - 2 <= paddleRect.right && 
-            ((ballRect.top >= paddleRect.top && ballRect.top <= paddleRect.bottom) || 
-             (ballRect.bottom >= paddleRect.top && ballRect.bottom <= paddleRect.bottom))) {
+        if (ballRect.left - 2 <= paddleRect1.right && 
+            ((ballRect.top >= paddleRect1.top && ballRect.top <= paddleRect1.bottom) || 
+             (ballRect.bottom >= paddleRect1.top && ballRect.bottom <= paddleRect1.bottom))) {
              dx = -dx;
          }
         
         
-        if (ballRect.left - 2 <= paddleRect.right && 
-            ((ballRect.top >= paddleRect.top && ballRect.top <= paddleRect.bottom) || 
-             (ballRect.bottom >= paddleRect.top && ballRect.bottom <= paddleRect.bottom))) {
+        if (ballRect.right + 2 >= paddleRect2.left && 
+            ((ballRect.top >= paddleRect2.top && ballRect.top <= paddleRect2.bottom) || 
+             (ballRect.bottom >= paddleRect2.top && ballRect.bottom <= paddleRect2.bottom))) {
              dx = -dx;
          }
          
