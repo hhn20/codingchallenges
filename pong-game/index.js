@@ -125,6 +125,12 @@ document.getElementById("start_button").addEventListener('click', (event) => {
     }
 
     function moveRightPaddle() {
+        let ballRect = ball.getBoundingClientRect();
+        let containerRect = container.getBoundingClientRect();
+        let rightPaddleRect = paddle2.getBoundingClientRect()
+
+        const ballCenter = (ballRect.top + ballRect.bottom)/2;
+        const 
         
     }
 
