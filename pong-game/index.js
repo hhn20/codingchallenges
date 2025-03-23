@@ -35,7 +35,6 @@ document.addEventListener('keydown', (event) => {
 
 });
 
-document.addEventListener()
 
 document.getElementById("start_button").addEventListener('click', (event) => {
     const ballRect = ball.getBoundingClientRect();
@@ -122,6 +121,10 @@ document.getElementById("start_button").addEventListener('click', (event) => {
         offsetX += dx;
         offsetY += dy;
         ball.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+        
+    }
+
+    function moveRightPaddle() {
         
     }
 
