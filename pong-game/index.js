@@ -3,7 +3,9 @@ const paddle1 = document.getElementById("paddle1")
 const paddle2 = document.getElementById("paddle2")
 const ball = document.getElementById("ball")
 const step = 10;
+const stepai = 2;
 let offsetY = 0;
+let offsetYai = 0;
 
 
 
@@ -66,6 +68,7 @@ document.getElementById("start_button").addEventListener('click', (event) => {
 
         const ballRect = ball.getBoundingClientRect();
         const paddleRect1 = paddle1.getBoundingClientRect()
+        const paddleRect2 = paddle2.getBoundingClientRect();
 
         // Ball bounces off top/bottom walls
         if (ballRect.top - 2 <= containerRect.top || ballRect.bottom + 2 >= containerRect.bottom) {
@@ -124,15 +127,45 @@ document.getElementById("start_button").addEventListener('click', (event) => {
         
     }
 
+
+
     function moveRightPaddle() {
-        let ballRect = ball.getBoundingClientRect();
-        let containerRect = container.getBoundingClientRect();
-        let rightPaddleRect = paddle2.getBoundingClientRect()
+        const ballRect = ball.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+        const rightPaddleRect = paddle2.getBoundingClientRect();
+    
+        const ballCenter = (ballRect.top + ballRect.bottom) / 2;
+        const rightPaddleCenter = (rightPaddleRect.top + rightPaddleRect.bottom) / 2;
 
-        const ballCenter = (ballRect.top + ballRect.bottom)/2;
-        const 
+        const diff = (ballRect.bottom < rightPaddleRect.top) ? 1 :(
+                     (ballRect.top > rightPaddleRect.bottom) ? -1 : 0);
         
+        console.log(ballRect.top, rightPaddleRect.bottom,'fffffffffff');
+        // Only track the ball if it's on the right half of the container
+        if (diff < 0) {
+            // Move down
+            offsetYai += (rightPaddleRect.bottom === containerRect.bottom)
+                ? 0
+                : ((rightPaddleRect.bottom + stepai + 1 > containerRect.bottom)
+                    ? (containerRect.bottom - rightPaddleRect.bottom - 1)
+                    : stepai);
+        } else if (diff > 0) {
+            // Move up
+            offsetYai -= (rightPaddleRect.top === containerRect.top)
+                ? 0
+                : ((rightPaddleRect.top - stepai + 1 < containerRect.top)
+                    ? (-containerRect.top + rightPaddleRect.top - 1)
+                    : stepai);
+                    
+        }
+        paddle2.style.transform = `translate(0px, ${offsetYai}px)`;
     }
+    
+    
 
-    setInterval(moveBall, 50);
+    setInterval(() => {
+        moveBall();
+        moveRightPaddle();
+    }, 50);
+    
 });
